@@ -1,0 +1,20 @@
+curl 'https://webinfo.dankook.ac.kr/tiac/univ/lssn/lpci/views/lssnPopup/tmtbl.do' \
+  -H 'Accept: application/json'\
+  -H 'Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7' \
+  -H 'Cache-Control: max-age=0' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/x-www-form-urlencoded' \
+  -H $'Cookie: WMONID=gL6AyOBwtHL; _ga=GA1.3.586918664.1646299045; __utmz=245676305.1651132701.3.3.utmcsr=google|utmccn=(organic)|utmcmd=organic|utmctr=(not%20provided); __utma=245676305.586918664.1646299045.1651421415.1659940877.5; kalogin=sZNUfvhsetY7vA==$dankook.ac.kr; TIS_JSESSIONID=8qU3fbZvqROIu5aoU20cFH0a3k1WkH4TQeby9ydkpESRWTPXwn3w\u0021963668470; CMS_JSESSIONID=F5reDwoeAX72Z0XzU9n634shjbmPQOL9TaN60XWX10WKCy6QKv1r\u0021784937440' \
+  -H 'Origin: https://webinfo.dankook.ac.kr' \
+  -H 'Referer: https://webinfo.dankook.ac.kr/tiac/univ/lssn/lpci/views/lssnPopup/tmtbl.do' \
+  -H 'Sec-Fetch-Dest: document' \
+  -H 'Sec-Fetch-Mode: navigate' \
+  -H 'Sec-Fetch-Site: same-origin' \
+  -H 'Sec-Fetch-User: ?1' \
+  -H 'Upgrade-Insecure-Requests: 1' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.0.0 Safari/537.36' \
+  -H 'sec-ch-ua: ".Not/A)Brand";v="99", "Google Chrome";v="103", "Chromium";v="103"' \
+  -H 'sec-ch-ua-mobile: ?0' \
+  -H 'sec-ch-ua-platform: "macOS"' \
+  --data-raw 'yy=2022&semCd=2&qrySxn=1&curiCparCd=&lesnPlcCd=1&colgCd=&dpmtCd=&mjSubjKnm=SW%EC%9C%B5%ED%95%A9%EC%BD%94%EB%94%A92&mjDowCd=&grade=&pfltNm=' \
+  --compressed
