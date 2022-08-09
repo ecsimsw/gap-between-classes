@@ -1,5 +1,6 @@
 import cv2
 import numpy as np
+from PIL import Image
 
 
 def print_image(dst):
@@ -13,8 +14,8 @@ def draw_point(img, position, size):
 
 
 img_bin = cv2.imread("resources/sample1.jpg", cv2.IMREAD_COLOR)
-dst = cv2.cvtColor(img_bin, cv2.COLOR_BGR2GRAY)
-_, img_bin = cv2.threshold(dst, 240, 1000, cv2.THRESH_BINARY)
+img_bin = cv2.cvtColor(img_bin, cv2.COLOR_BGR2GRAY)
+_, img_bin = cv2.threshold(img_bin, 240, 1000, cv2.THRESH_BINARY)
 
 line_min_width = 40
 kernal_h = np.ones((1, line_min_width), np.uint8)
@@ -36,12 +37,9 @@ now_y = start_y
 for class_time in class_times:
     now_x = start_x
     for day in days:
-        draw_point(img_bin, tuple([now_x, now_y]), 5)
+        if(img_bin.item(now_y, now_x) == 0) :
+            draw_point(img_bin, tuple([now_x, now_y]), 5)
+            print(day, " ", class_time)
         now_x += gap_of_days
     now_y += gap_of_half_hour
-
 print_image(img_bin)
-
-# cv2.imshow("img", img_bin)
-# cv2.waitKey(0)
-# cv2.destroyAllWindows()
