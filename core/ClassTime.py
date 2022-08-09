@@ -8,7 +8,18 @@ PIXEL_GAP_OF_DAYS = 204
 PIXEL_GAP_OF_CLASS_TIME = 67
 
 
-def class_times(class_image):
+def common_class_table(class_tables):
+    common_table = ClassTable()
+    for time in CLASS_TIMES:
+        for day in DAYS:
+            for table in class_tables:
+                if table.isFilled(day, time):
+                    common_table.setFilled(day, time)
+                    break
+    return common_table
+
+
+def class_time(class_image):
     img_bin = image_as_binary(class_image)
     class_table = ClassTable()
 
@@ -17,7 +28,7 @@ def class_times(class_image):
         pixel_x = START_POSITION[0]
         for day in DAYS:
             if img_bin.item(pixel_y, pixel_x) == 0:
-                class_table.fill(day, time)
+                class_table.setFilled(day, time)
             pixel_x += PIXEL_GAP_OF_DAYS
         pixel_y += PIXEL_GAP_OF_CLASS_TIME
     return class_table
@@ -28,13 +39,20 @@ class ClassTable:
     def __init__(self):
         self.table = [[0 for _ in range(len(DAYS))] for _ in range(len(CLASS_TIMES))]
 
-    def fill(self, day, time):
-        day_index = DAYS.index(day)
-        time_index = CLASS_TIMES.index(time)
-        self.table[time_index][day_index] = 1
+    def setFilled(self, day, time):
+        self.table[CLASS_TIMES.index(time)][DAYS.index(day)] = 1
+
+    def setEmpty(self, day, time):
+        self.table[CLASS_TIMES.index(time)][DAYS.index(day)] = 0
 
     def print(self):
         for i in self.table:
             for j in i:
                 print(j, end=' ')
             print()
+
+    def isFilled(self, day, time):
+        return self.table[CLASS_TIMES.index(time)][DAYS.index(day)] == 1
+
+    def isEmpty(self, day, time):
+        return self.table[CLASS_TIMES.index(time)][DAYS.index(day)] == 0
