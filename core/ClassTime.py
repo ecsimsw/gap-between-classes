@@ -1,7 +1,7 @@
 from core.ImageUtils import draw_point
 
-DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI']
-CLASS_TIMES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT']
+CLASS_TIMES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24]
 
 START_POSITION = (165, 100)
 PIXEL_GAP_OF_DAYS = 204
@@ -51,6 +51,9 @@ class ClassTable:
 
     def setFilled(self, day, time):
         self.table[CLASS_TIMES.index(time)][DAYS.index(day)] = 1
+
+    def setFilledByIndex(self, day, time):
+        self.table[time][day] = 1
 
     def setEmpty(self, day, time):
         self.table[CLASS_TIMES.index(time)][DAYS.index(day)] = 0
