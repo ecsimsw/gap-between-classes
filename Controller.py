@@ -1,10 +1,22 @@
-import cv2
+from fastapi import FastAPI, File, UploadFile
+from typing import List
 
 from core.ClassTime import class_time, common_class_table
 
-img1 = cv2.imread("resources/sample1.jpg", cv2.IMREAD_COLOR)
-img2 = cv2.imread("resources/sample1.jpg", cv2.IMREAD_COLOR)
+app = FastAPI()
 
-class_times = [class_time(img1), class_time(img2)]
-gap_table = common_class_table(class_times)
-gap_table.print()
+
+@app.get("/classTime")
+def info():
+    return {"ecsimsw": "2022.08.10"}
+
+
+@app.post("/classTime")
+async def read_item(files: List[UploadFile] = File(...)):
+    file1 = await files[0].read()
+    file2 = await files[1].read()
+
+    class_times = [class_time(file1), class_time(file2)]
+    print(type(class_times))
+    common_table = common_class_table(class_times)
+    return {"common_table": common_table}

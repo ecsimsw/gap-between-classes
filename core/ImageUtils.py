@@ -13,6 +13,8 @@ def draw_point(img, position, size):
 
 
 def image_as_binary(img):
+    nparr = np.fromstring(img, np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     _, img = cv2.threshold(img, 240, 1000, cv2.THRESH_BINARY)
 
