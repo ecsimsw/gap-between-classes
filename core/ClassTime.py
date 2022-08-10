@@ -1,4 +1,4 @@
-from core.ImageUtils import image_as_binary
+from core.ImageUtils import draw_point
 
 DAYS = ['MON', 'TUE', 'WED', 'THU', 'FRI']
 CLASS_TIMES = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
@@ -19,10 +19,8 @@ def common_class_table(class_tables):
     return common_table
 
 
-def class_time(class_image):
-    img_bin = image_as_binary(class_image)
+def class_time(img_bin):
     class_table = ClassTable()
-
     pixel_y = START_POSITION[1]
     for time in CLASS_TIMES:
         pixel_x = START_POSITION[0]
@@ -32,6 +30,18 @@ def class_time(class_image):
             pixel_x += PIXEL_GAP_OF_DAYS
         pixel_y += PIXEL_GAP_OF_CLASS_TIME
     return class_table
+
+
+def draw_dot_on_class_time(img_bin):
+    pixel_y = START_POSITION[1]
+    for _ in CLASS_TIMES:
+        pixel_x = START_POSITION[0]
+        for _ in DAYS:
+            # if img_bin.item(pixel_y, pixel_x) == 0:
+            draw_point(img_bin, tuple([pixel_x, pixel_y]), 5)
+            pixel_x += PIXEL_GAP_OF_DAYS
+        pixel_y += PIXEL_GAP_OF_CLASS_TIME
+    return img_bin
 
 
 class ClassTable:
