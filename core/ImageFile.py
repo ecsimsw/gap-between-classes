@@ -2,6 +2,11 @@ import cv2
 import numpy as np
 
 
+def file_to_image(file):
+    arr = np.fromstring(file, np.uint8)
+    return cv2.imdecode(arr, cv2.IMREAD_COLOR)
+
+
 def image_read(path):
     return cv2.imread(path, cv2.IMREAD_COLOR)
 
