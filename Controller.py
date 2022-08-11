@@ -1,10 +1,7 @@
-from typing import List
+from fastapi import FastAPI
 
-from fastapi import FastAPI, File, UploadFile
-
-from Service import draw_dot_on_class_time, class_time_positions, as_binary_image, class_time
-from core.ImageUtils import image_as_binary, image_read, print_image, binary_image_from_string
-import cv2
+from core.Service import calculate_common_time
+from core.ImageFile import image_read
 
 app = FastAPI()
 
@@ -35,8 +32,9 @@ def sampleTest():
     file5 = image_read("sample/sample5.jpeg")
     file6 = image_read("sample/sample6.jpeg")
 
-    table1 = class_time(file1)
-    table1.print()
+    class_table = calculate_common_time([file1, file2, file3, file4, file5, file6])
+    class_table.print()
+
     # table2 = draw_dot_on_class_time(file2)
     # table3 = draw_dot_on_class_time(file3)
     # table4 = draw_dot_on_class_time(file4)
