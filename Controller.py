@@ -1,6 +1,8 @@
-from fastapi import FastAPI
+from typing import List
 
-from core.Service import calculate_common_time
+from fastapi import FastAPI, UploadFile
+from multipart.multipart import File
+
 from core.ImageFile import image_read
 
 app = FastAPI()
@@ -31,26 +33,8 @@ def sampleTest():
     file4 = image_read("sample/sample4.jpeg")
     file5 = image_read("sample/sample5.jpeg")
     file6 = image_read("sample/sample6.jpeg")
+    dark = image_read("sample/sample-dark1.jpeg")
 
-    class_table = calculate_common_time([file1, file2, file3, file4, file5, file6])
-    class_table.print()
+    # class_table = calculate_common_time([file1, file2, file3, file4, file5, file6])
+    # class_table.print()
 
-    # table2 = draw_dot_on_class_time(file2)
-    # table3 = draw_dot_on_class_time(file3)
-    # table4 = draw_dot_on_class_time(file4)
-    # table5 = draw_dot_on_class_time(file5)
-    # table6 = draw_dot_on_class_time(file6)
-
-    # file1 = as_binary_image(file1)
-    # class_table = class_time_positions(file1)
-    # print_image(class_table)
-
-    # print_image(table1)
-    # print_image(table2)
-    # print_image(table3)
-    # print_image(table4)
-    # print_image(table5)
-    # print_image(table6)
-
-
-sampleTest()

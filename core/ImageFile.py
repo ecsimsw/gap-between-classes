@@ -6,22 +6,23 @@ def image_read(path):
     return cv2.imread(path, cv2.IMREAD_COLOR)
 
 
-def print_image(dst):
-    cv2.imshow("img", dst)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-
-
-def draw_point(img, position, size):
-    cv2.line(img, position, position, (0, 0, 255), size)
+def is_dark_mode(img):
+    img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    return img.item(5, 5) < 100
 
 
 class BinaryImage:
 
     def __init__(self, img):
+        if is_dark_mode(img):
+            img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            img = 255 - img
+            _, img = cv2.threshold(img, 230, 1000, cv2.THRESH_BINARY)
+            self.img = img
+            return
+
         img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         _, img = cv2.threshold(img, 240, 1000, cv2.THRESH_BINARY)
-
         line_min_width = 35
         kernel_h = np.ones((1, line_min_width), np.uint8)
         kernel_v = np.ones((line_min_width, 1), np.uint8)
@@ -76,3 +77,11 @@ class BinaryImage:
                 if self.img.item(time_line + LAST_HALF_DISTANCE, day_line + DISTANCE) == 0:
                     table[period + 1][day] = 1
         return table
+
+    def draw_point(self, position, size):
+        cv2.line(self.img, position, position, (0, 0, 255), size)
+
+    def print(self):
+        cv2.imshow("img", self.img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
